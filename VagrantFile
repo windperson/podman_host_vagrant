@@ -1,0 +1,33 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/alpine315"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = 1
+    vb.memory = "1024"
+    vb.name = "podman-host"
+  end
+
+  config.vm.hostname = "podman-host"
+
+  config.vm.provision "shell" do |s|
+    s.inline = <<-EOF
+      ROOTLESS_USR=$1
+      echo "rootless_usr: $ROOTLESS_USR"
+      apk add podman --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+      modprobe tun
+      echo tun >>/etc/modules
+      echo ${ROOTLESS_USR}:10000:65536 >> /etc/subuid
+      echo ${ROOTLESS_USR}:10000:65536 >> /etc/subgid
+      sed -i -e 's/#rc_cgroup_mode="hybrid"/rc_cgroup_mode="unified"/' /etc/rc.conf
+      rc-update add cgroups
+      rc-service cgroups start
+      PODMANUSER_CMD="s/#podman_user=\\"root\\"/podman_user=\\"${ROOTLESS_USR}\\"/"
+      sed -i -e $PODMANUSER_CMD /etc/conf.d/podman
+      rc-update add podman
+      rc-service podman start
+    EOF
+
+    s.args = ["vagrant"]
+  end
+
+end
