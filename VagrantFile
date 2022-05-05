@@ -1,19 +1,21 @@
 Vagrant.configure("2") do |config|
   VM_Name = "podman-host"
   config.vm.box = "generic/alpine315"
+  VM_CpuCount = "2"
+  VM_Ram = "1024"
 
   config.vm.provider "virtualbox" do |v, override|
     v.gui = false
-    v.cpus = 2
-    v.memory = "1024"
+    v.cpus = VM_CpuCount
+    v.memory = VM_Ram
     v.name = VM_Name
     override.vm.hostname = VM_Name
   end
 
   config.vm.provider "vmware_desktop" do |v, override|
     v.gui = false
-    v.vmx["memsize"] = "1024"
-    v.vmx["numvcpus"] = "2"
+    v.vmx["memsize"] = VM_Ram
+    v.vmx["numvcpus"] = VM_CpuCount
     override.vm.hostname = VM_Name
   end
 
