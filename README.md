@@ -55,7 +55,7 @@ winget install --id RedHat.Podman
     ```powershell
     vagrant ssh -c 'podman --remote info --format={{".Host.RemoteSocket.Path"}}'
     ```
-    {% raw %}
+    {% endraw %}
     ![get podman socket path](./pics/get_podman_socket_path.png)
 7. Run following command to add a remote VM connection settings in Host Windows machine, this example is using Port **2222**, remote socket path is **/tmp/podman-run-1000/podman/podman.sock**, and the connection name is **vg_podman**:
     ```powershell
