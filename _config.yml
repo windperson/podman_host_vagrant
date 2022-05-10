@@ -7,4 +7,3 @@ search_enabled: true
 back_to_top: true
 back_to_top_text: "Back to top"
 
-theme: jekyll-theme-slate
