@@ -43,20 +43,20 @@ winget install --id RedHat.Podman
 4. Copy the generated public key into the Vagrant Virtual Machine by following command in PowerShell:
     ```
     type $env:USERPROFILE\.ssh\id_ed25519.pub | vagrant ssh -c "cat >> ~/.ssh/authorized_keys"
-    ```
+    ```  
     ![generate keypair and copy to VM](./pics/generate_and_copy_public_key_to_vm.png)
 5. Run ```vagrant ssh-config``` to get the SSH host binding port of the Vagrant VM:
     ![run vagrant ssh-config](./pics/vagrant_ssh-config.png)
 6. Run following command to get the remote socket path of Podman in the Vagrant VM:
     ```
     vagrant ssh -c "podman --remote info --format={{"".Host.RemoteSocket.Path""}}"
-    ```
+    ```  
     ![get podman socket path](./pics/get_podman_socket_path.png)
 7. Run following command to add a remote VM connection settings in Host Windows machine, this example is using Port **2222**, remote socket path is **/tmp/podman-run-1000/podman/podman.sock**, and the connection name is **vg_podman**:
     ```
     podman --remote system connection add vg_podman --identity $env:USERPROFILE\.ssh\id_ed25519 ssh://vagrant@127.0.0.1:2222/tmp/podman-run-1000/podman/podman.sock
-    ```
-    Then use ```podman system connection list``` to verify the connection setting.
+    ```  
+    Then use ```podman system connection list``` to verify the connection setting.  
     ![add remote connection](./pics/add_podman_remote_connection.png)
 
 After done above steps, you can use ```podman info``` to verify remote container host connection status.
