@@ -40,10 +40,12 @@ winget install --id RedHat.Podman
 2. Inside the git clone folder, run ```vagrant up``` to create the Vagrant environment in PowerShell:
     ![vagrant up](./pics/vagrant_up.png)
 3. Generate an [ed25519](https://www.unixtutorial.org/how-to-generate-ed25519-ssh-key) SSH keypair files on Windows host, if you've never created before:
+    {% include codeHeader.html %}
     ```powershell
     ssh-keygen -t ed25519
     ```
 4. Copy the generated public key into the Vagrant Virtual Machine by following command in PowerShell:
+    {% include codeHeader.html %}
     ```powershell
     type $env:USERPROFILE\.ssh\id_ed25519.pub | vagrant ssh -c "cat >> ~/.ssh/authorized_keys"
     ```  
@@ -51,6 +53,7 @@ winget install --id RedHat.Podman
 5. Run ```vagrant ssh-config``` to get the SSH host binding port of the Vagrant VM:
     ![run vagrant ssh-config](./pics/vagrant_ssh-config.png)
 6. Run following command to get the remote socket path information of Podman in the Vagrant VM:
+    {% include codeHeader.html %}
     {% raw %}
     ```powershell
     vagrant ssh -c 'podman --remote info --format={{".Host.RemoteSocket.Path"}}'
@@ -59,6 +62,7 @@ winget install --id RedHat.Podman
     ![get podman socket path](./pics/get_podman_socket_path.png)  
     The above example shows the socket path is */tmp/podman-run-1000/podman/podman.sock*.
 7. Run following command to add a remote VM connection settings on Host Windows machine, this example is using Port **2222**, remote socket path is **/tmp/podman-run-1000/podman/podman.sock**, and the connection name is **vg_podman**:
+    {% include codeHeader.html %}
     ```powershell
     podman --remote system connection add vg_podman --identity $env:USERPROFILE\.ssh\id_ed25519 ssh://vagrant@127.0.0.1:2222/tmp/podman-run-1000/podman/podman.sock
     ```  
@@ -72,3 +76,5 @@ winget install --id RedHat.Podman
 2. If you need to recreate the VM, Invoke ```vagrant destroy -f``` in the git clone folder, then ```vagrant up``` again. Only needs do above step **4.** to copy the ed25519 public key from Windows into new VM.
 3. The VM will automatically suspend when Windows system shutdown or reboot, it's state can be known via invoke ```vagrant status``` in the git clone folder, you need to resume the VM by running ```vagrant up``` to be able to use Podman host again.
     ![run vagrant status](./pics/run_vagrant_status.png)
+
+<script src="{{ site.baseurl }}{% link assets/js/copyCode.js %}"></script>
