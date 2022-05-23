@@ -40,12 +40,10 @@ winget install --id RedHat.Podman
 2. Inside the git clone folder, run ```vagrant up``` to create the Vagrant environment in PowerShell:
     ![vagrant up](./pics/vagrant_up.png)
 3. Generate an [ed25519](https://www.unixtutorial.org/how-to-generate-ed25519-ssh-key) SSH keypair files on Windows host, if you've never created before:
-    {% include codeHeader.html %}
     ```powershell
     ssh-keygen -t ed25519
     ```
 4. Copy the generated public key into the Vagrant Virtual Machine by following command in PowerShell:
-    {% include codeHeader.html %}
     ```powershell
     type $env:USERPROFILE\.ssh\id_ed25519.pub | vagrant ssh -c "cat >> ~/.ssh/authorized_keys"
     ```  
@@ -53,7 +51,6 @@ winget install --id RedHat.Podman
 5. Run ```vagrant ssh-config``` to get the SSH host binding port of the Vagrant VM:
     ![run vagrant ssh-config](./pics/vagrant_ssh-config.png)
 6. Run following command to get the remote socket path information of Podman in the Vagrant VM:
-    {% include codeHeader.html %}
     {% raw %}
     ```powershell
     vagrant ssh -c 'podman --remote info --format={{".Host.RemoteSocket.Path"}}'
