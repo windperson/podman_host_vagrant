@@ -77,4 +77,4 @@ winget install --id RedHat.Podman
 3. The VM will automatically suspend when Windows system shutdown or reboot, it's state can be known via invoke ```vagrant status``` in the git clone folder, you need to resume the VM by running ```vagrant up``` to be able to use Podman host again.
     ![run vagrant status](./pics/run_vagrant_status.png)
 
-<script src="{{ site.baseurl }}{% link assets/scripts/copyCode.js %}"></script>
+{% include codeCopyScript.html %}
