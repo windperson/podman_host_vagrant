@@ -59,7 +59,6 @@ winget install --id RedHat.Podman
     ![get podman socket path](./pics/get_podman_socket_path.png)  
     The above example shows the socket path is */tmp/podman-run-1000/podman/podman.sock*.
 7. Run following command to add a remote VM connection settings on Host Windows machine, this example is using Port **2222**, remote socket path is **/tmp/podman-run-1000/podman/podman.sock**, and the connection name is **vg_podman**:
-    {% include codeHeader.html %}
     ```powershell
     podman --remote system connection add vg_podman --identity $env:USERPROFILE\.ssh\id_ed25519 ssh://vagrant@127.0.0.1:2222/tmp/podman-run-1000/podman/podman.sock
     ```  
@@ -73,5 +72,3 @@ winget install --id RedHat.Podman
 2. If you need to recreate the VM, Invoke ```vagrant destroy -f``` in the git clone folder, then ```vagrant up``` again. Only needs do above step **4.** to copy the ed25519 public key from Windows into new VM.
 3. The VM will automatically suspend when Windows system shutdown or reboot, it's state can be known via invoke ```vagrant status``` in the git clone folder, you need to resume the VM by running ```vagrant up``` to be able to use Podman host again.
     ![run vagrant status](./pics/run_vagrant_status.png)
-
-{% include codeCopyScript.html %}
