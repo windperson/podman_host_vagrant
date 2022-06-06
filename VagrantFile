@@ -1,7 +1,6 @@
 Vagrant.configure("2") do |config|
   VM_Name = "podman-host"
   config.vm.box = "generic/alpine316"
-  config.vm.box_version = "4.0.2"
   VM_CpuCount = "2"
   VM_Ram = "1024"
 
@@ -25,7 +24,7 @@ Vagrant.configure("2") do |config|
     s.inline = <<-EOF
       ROOTLESS_USR=$1
       echo "rootless_usr: $ROOTLESS_USR"
-      apk add podman --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+      apk add htop podman --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
       modprobe tun
       echo tun >>/etc/modules
       echo ${ROOTLESS_USR}:10000:65536 >> /etc/subuid
