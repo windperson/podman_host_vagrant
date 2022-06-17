@@ -1,5 +1,6 @@
 ---
-title: Podman remote container host setup 
+title: Podman remote container host setup
+nav_order: 3
 ---
 
 # Podman remote container host setup for Windows
@@ -8,21 +9,17 @@ title: Podman remote container host setup
 
 * [PowerShell v7.2 or above](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
 * [Vagrant](https://www.vagrantup.com/downloads) on Windows
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or [VMware Workstation Pro](https://www.vmware.com/products/workstation-pro.html) / [VMWare Workstation Player](https://www.vmware.com/products/workstation-player.html) with [Vagrant vmware Utility](https://www.vagrantup.com/vmware/downloads) installed.
+* [VMware Workstation Pro](https://www.vmware.com/products/workstation-pro.html) or [VMWare Workstation Player](https://www.vmware.com/products/workstation-player.html) 
+* [Vagrant vmware Utility](https://www.vagrantup.com/vmware/downloads)
 * [Podman Windows Client](https://podman.io/getting-started/installation#windows)
 
 
-Vagrant, VirtualBox, VMWare Workstation Pro/Player, and Podman Windows Client can be installed from [**winget** (Windows Package Manager Client)](https://docs.microsoft.com/en-us/windows/package-manager/winget/) command line tool on Windows 10 & 11.
+Vagrant, VMWare Workstation Pro/Player, and Podman Windows Client can be installed from [**winget** (Windows Package Manager Client)](https://docs.microsoft.com/en-us/windows/package-manager/winget/) command line tool on Windows 10 & 11.
 
 ```powershell
 winget install --id Hashicorp.Vagrant
 ```
 ![Winget install vagrant](./pics/vagrant_winget_install.png)
-
-```powershell
-winget install --id Oracle.VirtualBox
-```
-![Winget install virtualbox](./pics/virtualbox_winget_install.png)
 
 ```powershell
 winget install --id RedHat.Podman
@@ -32,7 +29,7 @@ winget install --id RedHat.Podman
 ### Notes:
 
 1. You need to re-open command line window to be able to use Podman cli program
-2. You may need to reboot the computer for VirtualBox virtual network driver to take effect.
+2. 
 
 ## Setup:
 
